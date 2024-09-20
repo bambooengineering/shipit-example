@@ -6,6 +6,6 @@ class Application < Sinatra::Base
   end
 
   get '/franky-says' do
-    'Relax.'
+    'Take It Easy'
   end
 end
