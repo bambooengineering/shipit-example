@@ -19,7 +19,7 @@ describe Application do
       get '/franky-says'
 
       expect(last_response).to be_ok
-      expect(last_response.body).to match /Relax/
+      expect(last_response.body).to match /Take It Easy/
     end
   end
 end
