@@ -2,8 +2,6 @@ queue_rules:
   - name: default
     queue_conditions:
       - label = reviewed
-    merge_conditions:
-      - label = deploy
     queue_branch_prefix: merge
 
 merge_queue:
