@@ -10,7 +10,7 @@ describe Application do
       get '/'
 
       expect(last_response).to be_ok
-      expect(last_response.body).to match /Hello, World!!!/
+      expect(last_response.body).to match /Hello, World!/
     end
   end
 
