@@ -1,3 +1,8 @@
 queue_rules:
   - name: default
+    queue_conditions:
       - label = reviewed
+    queue_branch_prefix: merge
+
+merge_queue:
+  max_parallel_checks: 4
