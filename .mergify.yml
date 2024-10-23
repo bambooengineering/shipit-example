@@ -1,8 +1,10 @@
 queue_rules:
   - name: default
     queue_conditions:
-      - check-success = mycijob
-      - "#approved-reviews-by >= 1"
       - label = reviewed
+    merge_conditions:
+      - label = deploy
+    queue_branch_prefix: merge
+
 merge_queue:
   max_parallel_checks: 4
