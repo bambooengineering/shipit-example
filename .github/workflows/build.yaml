@@ -20,5 +20,4 @@ jobs:
 
     - name: run tests
       run: |
-        sleep 30
         bundle exec rspec
