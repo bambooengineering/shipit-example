@@ -1,5 +1,3 @@
 queue_rules:
   - name: default
-    queue_conditions:
-      - label=reviewed
-    queue_branch_prefix: merge
+      - label = reviewed
