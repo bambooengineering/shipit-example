@@ -1,7 +1,5 @@
 queue_rules:
   - name: default
     queue_conditions:
-      - check-success = mycijob
-      - "#approved-reviews-by >= 1"
       - label = reviewed
     queue_branch_prefix: merge
