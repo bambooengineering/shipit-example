@@ -23,3 +23,10 @@ pull_request_rules:
       label:
         toggle:
           - top of the stack
+
+  - name: Automatic add the queue when reviewed
+    conditions:
+      - label = reviewed
+    actions:
+      queue:
+        merge_method: merge
