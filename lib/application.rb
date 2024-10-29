@@ -2,10 +2,6 @@ require 'sinatra'
 
 class Application < Sinatra::Base
   get '/' do
-    'Hello, World!!!'
-  end
-
-  get '/franky-says' do
-    'Take It Easy'
+    'Hello, World'
   end
 end

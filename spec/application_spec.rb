@@ -10,16 +10,7 @@ describe Application do
       get '/'
 
       expect(last_response).to be_ok
-      expect(last_response.body).to match /Hello, World!!!/
-    end
-  end
-
-  describe "GET /franky-says" do
-    it "quotes Franky" do
-      get '/franky-says'
-
-      expect(last_response).to be_ok
-      expect(last_response.body).to match /Take It Easy/
+      expect(last_response.body).to match /Hello, World/
     end
   end
 end
