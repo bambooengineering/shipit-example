@@ -3,13 +3,14 @@ queue_rules:
     queue_conditions:
       - label = reviewed
       - label = high priority
-      - check-success = build
+      - check-success = Ruby
     queue_branch_prefix: merge_queue_high_
 
   - name: default
     queue_conditions:
       - label = reviewed
-      - check-success = build
+      - -label = high priority
+      - check-success = Ruby
     queue_branch_prefix: merge_queue_
 
 merge_queue:
