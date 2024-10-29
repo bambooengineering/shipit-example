@@ -1,17 +1,8 @@
 queue_rules:
-  - name: high-priority
-    queue_conditions:
-      - label = reviewed
-      - label = high priority
-      - check-success = build
-    queue_branch_prefix: merge_queue_high_
-
   - name: default
     queue_conditions:
       - label = reviewed
-      - check-success = build
-    queue_branch_prefix: merge_queue_
-
+    queue_branch_prefix: merge
 merge_queue:
   max_parallel_checks: 4
 pull_request_rules:
@@ -32,10 +23,16 @@ pull_request_rules:
       label:
         toggle:
           - top of the stack
-
   - name: Automatic add the queue when reviewed
     conditions:
       - label = reviewed
     actions:
       queue:
         merge_method: merge
+priority_rules:
+  - name: CVE
+    priority: high
+    conditions:
+      - and:
+          - label = cve
+    allow_checks_interruption: false
