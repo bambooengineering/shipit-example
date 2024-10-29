@@ -14,6 +14,7 @@ queue_rules:
 
 merge_queue:
   max_parallel_checks: 4
+
 pull_request_rules:
   - name: Add a queue label when PR is queued
     description: Toggle the queue label when a pull request is (un)queued.
@@ -39,3 +40,11 @@ pull_request_rules:
     actions:
       queue:
         merge_method: merge
+
+piority_rules:
+   - name: CVE
+     priority: high
+     conditions:
+       - and:
+           - label = cve
+     allow_checks_interruption: true
