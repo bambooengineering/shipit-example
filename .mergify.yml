@@ -1,8 +1,17 @@
 queue_rules:
+  - name: high-priority
+    queue_conditions:
+      - label = reviewed
+      - label = high priority
+      - check-success = build
+    queue_branch_prefix: merge_queue_high_
+
   - name: default
     queue_conditions:
       - label = reviewed
-    queue_branch_prefix: merge
+      - check-success = build
+    queue_branch_prefix: merge_queue_
+
 merge_queue:
   max_parallel_checks: 4
 pull_request_rules:
