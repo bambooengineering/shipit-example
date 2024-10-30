@@ -5,6 +5,7 @@ queue_rules:
       - label = high priority
       - check-success = Ruby
     queue_branch_prefix: merge_queue_high_
+    allow_checks_interruption: true
 
   - name: default
     queue_conditions:
@@ -12,6 +13,12 @@ queue_rules:
       - -label = high priority
       - check-success = Ruby
     queue_branch_prefix: merge_queue_
+    allow_checks_interruption: true
+
+    priority_rules:
+      - name: cve
+        conditions:
+          - label = cve
 
 merge_queue:
   max_parallel_checks: 4
@@ -41,11 +48,3 @@ pull_request_rules:
     actions:
       queue:
         merge_method: merge
-
-piority_rules:
-   - name: CVE
-     priority: high
-     conditions:
-       - and:
-           - label = cve
-     allow_checks_interruption: true
