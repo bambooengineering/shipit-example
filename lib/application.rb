@@ -3,7 +3,7 @@ require 'sinatra'
 class Application < Sinatra::Base
   get '/' do
     name = params.fetch(:name, "World")
-    "Hello, #{name}!"
+    "Hello, #{name}!!!"
   end
 
   get '/franky-says' do
