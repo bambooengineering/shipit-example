@@ -12,6 +12,13 @@ describe Application do
       expect(last_response).to be_ok
       expect(last_response.body).to match /Hello, World!!!/
     end
+
+    it "says hello with params" do
+      get '/?name=John'
+
+      expect(last_response).to be_ok
+      expect(last_response.body).to match /Hello, John!/
+    end
   end
 
   describe "GET /franky-says" do
