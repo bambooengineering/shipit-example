@@ -18,4 +18,5 @@ jobs:
       run: |
         echo "PR number is ${{ github.event.pull_request.number }}"
         echo "PR title is ${{ github.event.pull_request.title }}"
+        echo "PR has been merged ${{ github.event.pull_request.merged }}"
         echo "PR body is ${{ github.event.pull_request.body }}"
