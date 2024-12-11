@@ -1,0 +1,23 @@
+name: Notify Deployment
+# This workflow is triggered when a deployment PR is closed
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [master] # [production] in the real repo
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Debugging
+      run: |
+        echo "${{ toJson(github) }}"
+
+    - name: Echo the PR details
+      run: |
+        echo "PR number is ${{ github.event.pull_request.number }}"
+        echo "PR title is ${{ github.event.pull_request.title }}"
+        echo "PR has been merged ${{ github.event.pull_request.merged }}"
+        echo "PR body is ${{ github.event.pull_request.body }}"
