@@ -6,7 +6,7 @@ on:
     branches: [master]
 
 env:
-  channel: "#builds-test"
+  channel: "C07B364NPHB" # #builds-test
 
 jobs:
   notify:
@@ -22,20 +22,14 @@ jobs:
 
     - name: Notify in Slack
       id: slack
-      uses: slackapi/slack-github-action@v1.26.0
+      uses: slackapi/slack-github-action@v2.0.0
       with:
+        method: chat.postMessage
+        token: ${{ secrets.BANCOBOT_GITHUB_API_TOKEN }}
         payload: |
-          {
-            "blocks": [
-              {
-                "type": "section",
-                "text": {
-                  "type": "mrkdwn",
-                  "text": ${{ toJSON(github.event.pull_request.body) }}
-                }
-              }
-            ]
-          }
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.BANCOBOT_GITHUB_API_TOKEN }}
-        SLACK_WEBHOOK_TYPE: ${{ env.channel }}
+          channel: ${{ env.channel }}
+          blocks:
+            - type: "section"
+              text:
+                type: "mrkdwn"
+                text: ${{ toJSON(github.event.pull_request.body) }}
