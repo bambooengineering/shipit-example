@@ -7,7 +7,6 @@ on:
 
 env:
   channel: "#builds-test"
-  token: ${{ secrets.BANCOBOT_GITHUB_API_TOKEN }}
 
 jobs:
   notify:
@@ -20,3 +19,23 @@ jobs:
         echo "PR title is ${{ github.event.pull_request.title }}"
         echo "PR has been merged ${{ github.event.pull_request.merged }}"
         echo "PR body is ${{ github.event.pull_request.body }}"
+
+    - name: Notify in Slack
+      id: slack
+      uses: slackapi/slack-github-action@v1.26.0
+      with:
+        payload: |
+          {
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "${{ github.event.pull_request.body }}"
+                }
+              }
+            ]
+          }
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.BANCOBOT_GITHUB_API_TOKEN }}
+        SLACK_WEBHOOK_TYPE: ${{ env.channel }}
