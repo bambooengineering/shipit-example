@@ -22,6 +22,7 @@ jobs:
         echo "PR body is ${{ github.event.pull_request.body }}"
 
     - name: Slack Markdown Converter
+      if: ${{ github.event.pull_request.merged }}
       id: slackify
       uses: LoveToKnow/slackify-markdown-action@v1.1.1
       with:
@@ -29,6 +30,7 @@ jobs:
 
     - name: Post to a Slack channel
       uses: slackapi/slack-github-action@v2.0.0
+      if: ${{ github.event.pull_request.merged }}
       with:
         method: chat.postMessage
         token: ${{ secrets.BANCOBOT_GITHUB_API_TOKEN }}
