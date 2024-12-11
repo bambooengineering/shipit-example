@@ -17,3 +17,16 @@ jobs:
         echo "PR title is ${{ github.event.pull_request.title }}"
         echo "PR has been merged ${{ github.event.pull_request.merged }}"
         echo "PR body is ${{ github.event.pull_request.body }}"
+
+    - name: Send GitHub Action data to a Slack workflow
+      uses: slackapi/slack-github-action@v2.0.0
+      with:
+        webhook: ${{ secrets.BANCOBOT_GITHUB_API_TOKEN }}
+        webhook-type: incoming-webhook
+        payload: |
+          text: "*GitHub Action build result*: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+          blocks:
+            - type: "section"
+              text:
+                type: "mrkdwn"
+                text: "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
