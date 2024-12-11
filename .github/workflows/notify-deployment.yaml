@@ -6,6 +6,9 @@ on:
     types: [closed]
     branches: [master] # [production] in the real repo
 
+env:
+  channel: "C07B364NPHB" # #builds-test
+
 jobs:
   notify:
     runs-on: ubuntu-latest
@@ -24,6 +27,7 @@ jobs:
         webhook: ${{ secrets.BANCOBOT_GITHUB_API_TOKEN }}
         webhook-type: incoming-webhook
         payload: |
+          channel: ${{ env.channel }}
           text: "*GitHub Action build result*: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
           blocks:
             - type: "section"
