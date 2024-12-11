@@ -21,6 +21,12 @@ jobs:
         echo "PR has been merged ${{ github.event.pull_request.merged }}"
         echo "PR body is ${{ github.event.pull_request.body }}"
 
+    - name: Slack Markdown Converter
+      id: slackify
+      uses: LoveToKnow/slackify-markdown-action@v1.1.1
+      with:
+        text: ${{ github.event.pull_request.body }}
+
     - name: Post to a Slack channel
       uses: slackapi/slack-github-action@v2.0.0
       with:
@@ -33,4 +39,4 @@ jobs:
             - type: "section"
               text:
                 type: "mrkdwn"
-                text: ${{ toJSON(github.event.pull_request.body) }}
+                text: ${{ toJSON(steps.slackify.outputs.text) }}
