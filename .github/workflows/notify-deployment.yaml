@@ -11,10 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Debugging
-      run: |
-        echo "${{ toJson(github) }}"
-
     - name: Echo the PR details
       run: |
         echo "PR number is ${{ github.event.pull_request.number }}"
