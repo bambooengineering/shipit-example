@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 
 # gem "rails"
-gem 'sinatra', '~> 4.0'
+gem 'sinatra', '~> 4.1'
 
 group :test do
   gem 'rack-test', '~> 2.1'
