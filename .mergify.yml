@@ -1,27 +1,71 @@
 queue_rules:
+  - name: duplicated high-priority from Automatic add the queue when reviewed
+    queue_conditions:
+      - label = reviewed
+      - label = high priority
+      - check-success = Ruby
+    merge_conditions: []
+    queue_branch_prefix: merge_queue_high_
+    merge_method: merge
   - name: high-priority
     queue_conditions:
       - label = reviewed
       - label = high priority
       - check-success = Ruby
     queue_branch_prefix: merge_queue_high_
-    allow_checks_interruption: true
-
+  - name: duplicated default from Automatic add the queue when reviewed
+    queue_conditions:
+      - label = reviewed
+      - -label = high priority
+      - check-success = Ruby
+    merge_conditions: []
+    queue_branch_prefix: merge_queue_
+    merge_method: merge
   - name: default
     queue_conditions:
       - label = reviewed
       - -label = high priority
       - check-success = Ruby
     queue_branch_prefix: merge_queue_
-    allow_checks_interruption: true
 
 priority_rules:
   - name: cve
     conditions:
       - label = cve
 
+
+  - name: Priority rule from queue `duplicated high-priority from Automatic add the
+      queue when reviewed`
+    conditions:
+      - label = reviewed
+      - label = high priority
+      - check-success = Ruby
+    allow_checks_interruption: true
+
+  - name: Priority rule from queue `high-priority`
+    conditions:
+      - label = reviewed
+      - label = high priority
+      - check-success = Ruby
+    allow_checks_interruption: true
+
+  - name: Priority rule from queue `duplicated default from Automatic add the queue
+      when reviewed`
+    conditions:
+      - label = reviewed
+      - -label = high priority
+      - check-success = Ruby
+    allow_checks_interruption: true
+
+  - name: Priority rule from queue `default`
+    conditions:
+      - label = reviewed
+      - -label = high priority
+      - check-success = Ruby
+    allow_checks_interruption: true
 merge_queue:
   max_parallel_checks: 4
+
 
 pull_request_rules:
   - name: Add a queue label when PR is queued
@@ -43,8 +87,6 @@ pull_request_rules:
           - top of the stack
 
   - name: Automatic add the queue when reviewed
-    conditions:
-      - label = reviewed
+    conditions: []
     actions:
       queue:
-        merge_method: merge
