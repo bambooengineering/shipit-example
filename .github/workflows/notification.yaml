@@ -1,0 +1,21 @@
+name: Notification
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [master]
+
+env:
+  channel: "#builds-test"
+  token: ${{ secrets.BANCOBOT_GITHUB_API_TOKEN }}
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Echo the PR details
+      run: |
+        echo "PR number is ${{ github.event.pull_request.number }}"
+        echo "PR title is ${{ github.event.pull_request.title }}"
+        echo "PR body is ${{ github.event.pull_request.body }}"
